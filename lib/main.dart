@@ -18,14 +18,6 @@ class Quizzler extends StatefulWidget {
 
 class _QuizzlerState extends State<Quizzler> {
 
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green'
-  ];
-
-  int questionNumber = 0;
-
   List<Icon> scoreKeeper = [
     Icon(
       Icons.check,
@@ -63,7 +55,7 @@ class _QuizzlerState extends State<Quizzler> {
               child: Center(
                 child: Container(
                   margin: EdgeInsets.all(20),
-                  child: Text(quizQuestion.questionsList[questionNumber].question,
+                  child: Text(quizQuestion.getQuestion(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -79,15 +71,13 @@ class _QuizzlerState extends State<Quizzler> {
                 margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 child: TextButton(
                   onPressed: () {
+                    if (quizQuestion.getCorrectAnswer() == true) {
+                      print('Correct answer!');
+                    } else {
+                      print('Wrong answer!');
+                    }
                     setState(() {
-
-                      if (quizQuestion.questionsList[questionNumber].answer == true) {
-                        print('Correct answer!');
-                      } else {
-                        print('Wrong answer!');
-                      }
-
-                      questionNumber++;
+                      quizQuestion.nextQuestion();
                       scoreKeeper.add(
                         const Icon(
                           Icons.check,
@@ -112,13 +102,14 @@ class _QuizzlerState extends State<Quizzler> {
                 margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: TextButton(
                   onPressed: () {
+                    if (quizQuestion.getCorrectAnswer() == false) {
+                      print('Correct answer!');
+                    } else {
+                      print('Wrong answer!');
+                    }
+
                     setState(() {
-                      if (quizQuestion.questionsList[questionNumber].answer == false) {
-                        print('Correct answer!');
-                      } else {
-                        print('Wrong answer!');
-                      }
-                      questionNumber++;
+                      quizQuestion.nextQuestion();
                     });
                   },
                   child: const Text('False',
