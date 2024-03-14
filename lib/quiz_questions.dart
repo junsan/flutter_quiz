@@ -31,6 +31,18 @@ class QuizQuestion {
         true),
   ];
 
+  int getQuestionLength() {
+    return _questionsList.length;
+  }
+
+  int getCurrentQuestionNumber() {
+    return _questionNumber;
+  }
+
+  void resetQuestion() {
+    _questionNumber = 0;
+  }
+
   void nextQuestion() {
     if (_questionNumber < _questionsList.length - 1) {
       _questionNumber++;
