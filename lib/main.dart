@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'question.dart';
+import 'quiz_questions.dart';
+
+QuizQuestion quizQuestion = QuizQuestion();
 
 void main() {
   runApp(const Quizzler());
@@ -23,12 +25,6 @@ class _QuizzlerState extends State<Quizzler> {
   ];
 
   int questionNumber = 0;
-
-  List<Question> questionsList = [
-    Question(paraQuestion: 'You can lead a cow down stairs but not up stairs.', paraAnswer: false),
-    Question(paraQuestion: 'Approximately one quarter of human bones are in the feet.', paraAnswer: true),
-    Question(paraQuestion: 'A slug\'s blood is green.', paraAnswer: true),
-  ];
 
   List<Icon> scoreKeeper = [
     Icon(
@@ -67,7 +63,7 @@ class _QuizzlerState extends State<Quizzler> {
               child: Center(
                 child: Container(
                   margin: EdgeInsets.all(20),
-                  child: Text(questionsList[questionNumber].question,
+                  child: Text(quizQuestion.questionsList[questionNumber].question,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -85,7 +81,7 @@ class _QuizzlerState extends State<Quizzler> {
                   onPressed: () {
                     setState(() {
 
-                      if (questionsList[questionNumber].answer == true) {
+                      if (quizQuestion.questionsList[questionNumber].answer == true) {
                         print('Correct answer!');
                       } else {
                         print('Wrong answer!');
@@ -116,12 +112,14 @@ class _QuizzlerState extends State<Quizzler> {
                 margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: TextButton(
                   onPressed: () {
-                    if (questionsList[questionNumber].answer == false) {
-                      print('Correct answer!');
-                    } else {
-                      print('Wrong answer!');
-                    }
-                    questionNumber++;
+                    setState(() {
+                      if (quizQuestion.questionsList[questionNumber].answer == false) {
+                        print('Correct answer!');
+                      } else {
+                        print('Wrong answer!');
+                      }
+                      questionNumber++;
+                    });
                   },
                   child: const Text('False',
                     style: TextStyle(
