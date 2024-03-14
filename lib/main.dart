@@ -14,6 +14,30 @@ class Quizzler extends StatefulWidget {
 }
 
 class _QuizzlerState extends State<Quizzler> {
+
+  List<Icon> scoreKeeper = [
+    Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+    Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,10 +67,18 @@ class _QuizzlerState extends State<Quizzler> {
                 margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 child: TextButton(
                   onPressed: () {
-              
+                    setState(() {
+                      scoreKeeper.add(
+                        const Icon(
+                          Icons.check,
+                          color: Colors.green
+                        )
+                      );
+                    });
                   },
                   child: const Text('True',
                     style: TextStyle(
+                      fontSize: 20,
                       color: Colors.white
                     ),
                   ),
@@ -62,14 +94,18 @@ class _QuizzlerState extends State<Quizzler> {
                   onPressed: () {
 
                   },
-                  child: Text('False',
+                  child: const Text('False',
                     style: TextStyle(
+                      fontSize: 20,
                       color: Colors.white
                     ),
                   ),
                 ),
               ),
-            )
+            ),
+            Row(
+              children: scoreKeeper,
+            ),
           ],
         )
       ),
