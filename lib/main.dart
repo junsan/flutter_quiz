@@ -15,6 +15,14 @@ class Quizzler extends StatefulWidget {
 
 class _QuizzlerState extends State<Quizzler> {
 
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green'
+  ];
+
+  int questionNumber = 0;
+
   List<Icon> scoreKeeper = [
     Icon(
       Icons.check,
@@ -51,7 +59,8 @@ class _QuizzlerState extends State<Quizzler> {
               flex: 4,
               child: Center(
                 child: Container(
-                  child: const Text('This is where is the question text will go.',
+                  margin: EdgeInsets.all(20),
+                  child: Text(questions[questionNumber],
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -68,6 +77,7 @@ class _QuizzlerState extends State<Quizzler> {
                 child: TextButton(
                   onPressed: () {
                     setState(() {
+                      questionNumber++;
                       scoreKeeper.add(
                         const Icon(
                           Icons.check,
